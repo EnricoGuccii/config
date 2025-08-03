@@ -18,41 +18,41 @@ hide_when_typing = true
 
 
 [colors.primary]
-background = "#141415"
+background = "#121212"
 foreground = "#cdd6f4"
 dim_foreground = "#7f849c"
 bright_foreground = "#cdd6f4"
 
 [colors.cursor]
-text = "#141415"
+text = "#121212"
 cursor = "#f5e0dc"
 
 [colors.vi_mode_cursor]
-text = "#141415"
+text = "#121212"
 cursor = "#b4befe"
 
 [colors.search.matches]
-foreground = "#141415"
+foreground = "#121212"
 background = "#a6adc8"
 
 [colors.search.focused_match]
-foreground = "#141415"
+foreground = "#121212"
 background = "#a6e3a1"
 
 [colors.footer_bar]
-foreground = "#141415"
+foreground = "#121212"
 background = "#a6adc8"
 
 [colors.hints.start]
-foreground = "#141415"
+foreground = "#121212"
 background = "#f9e2af"
 
 [colors.hints.end]
-foreground = "#141415"
+foreground = "#121212"
 background = "#a6adc8"
 
 [colors.selection]
-text = "#141415"
+text = "#121212"
 background = "#f5e0dc"
 
 [colors.normal]

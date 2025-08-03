@@ -83,7 +83,7 @@ end, { desc = "Pick files" })
 require("catppuccin").setup {
   color_overrides = {
     mocha = {
-      base = "#141415"
+      base = "#121212"
     },
   }
 }
