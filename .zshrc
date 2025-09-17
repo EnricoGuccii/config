@@ -16,7 +16,7 @@ autoload -Uz bashcompinit && bashcompinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-PROMPT='%F{green}%n@%m%f %F{yellow}%~%f'
+PROMPT='%F{green}%n@%m%f %F{yellow}%~%f '
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced

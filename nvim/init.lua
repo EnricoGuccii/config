@@ -9,6 +9,7 @@ vim.pack.add({
   { src = "https://github.com/echasnovski/mini.pick" },
   { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
+  { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/catppuccin/nvim" },
 })
 
@@ -21,6 +22,7 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.signcolumn = "yes"
+vim.o.scrolloff = 5
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(args)
@@ -28,8 +30,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+  end,
+})
+
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "lua", "vim", "bash", "json", "python", "cpp" },
+  ensure_installed = { "lua", "vim", "bash", "json", "python", "cpp", "css", "arduino", },
   highlight = { enable = true },
 })
 
@@ -40,17 +48,24 @@ require("ibl").setup({
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
+
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {
       diagnostics = { globals = { "vim" } },
-      workspace = { checkThirdParty = false },
+      workspace = { checkThirdParty = true },
     },
   },
 })
 lspconfig.pyright.setup({})
-lspconfig.clangd.setup({})
+lspconfig.cssls.setup({})
+lspconfig.clangd.setup({
+  cmd = { "clangd", "--compile-commands-dir=." },
+  filetypes = { "c", "cpp", "objc", "objcpp", "arduino" },
+})
+
+vim.keymap.set("n", "K", vim.diagnostic.open_float, { noremap = true, silent = true })
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
@@ -72,13 +87,19 @@ cmp.setup({
   },
 })
 
-require("oil").setup()
+require("oil").setup({
+  view_options = {
+    show_hidden = true,
+  },
+})
 vim.keymap.set("n", "<leader>e", require("oil").open)
 
 require("mini.pick").setup()
 vim.keymap.set("n", "<leader>p", function()
   require("mini.pick").builtin.files()
 end, { desc = "Pick files" })
+
+require("which-key").setup()
 
 require("catppuccin").setup {
   color_overrides = {
