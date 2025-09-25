@@ -11,6 +11,7 @@ vim.pack.add({
   { src = "https://github.com/rafamadriz/friendly-snippets" },
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/catppuccin/nvim" },
+  { src = "https://github.com/windwp/nvim-autopairs" },
 })
 
 vim.g.mapleader = " "
@@ -46,6 +47,8 @@ require("ibl").setup({
   scope = { enabled = true },
 })
 
+require("nvim-autopairs").setup()
+
 require("luasnip.loaders.from_vscode").lazy_load()
 
 
@@ -58,12 +61,17 @@ lspconfig.lua_ls.setup({
     },
   },
 })
+
 lspconfig.pyright.setup({})
 lspconfig.cssls.setup({})
-lspconfig.clangd.setup({
-  cmd = { "clangd", "--compile-commands-dir=." },
-  filetypes = { "c", "cpp", "objc", "objcpp", "arduino" },
-})
+lspconfig.clangd.setup({})
+-- lspconfig.ccls.setup {
+--   init_options = {
+--     cache = {
+--       directory = ".ccls-cache",
+--     }
+--   },
+-- }
 
 vim.keymap.set("n", "K", vim.diagnostic.open_float, { noremap = true, silent = true })
 
