@@ -20,6 +20,7 @@ PROMPT='%F{green}%n@%m%f %F{yellow}%~%f '
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+export PATH="$HOME/.local/omnisharp:$PATH"
 
 alias grep='grep --color=auto'
 alias ll='lsd -all'
@@ -46,4 +47,4 @@ if command -v tmux >/dev/null 2>&1; then
     tmux attach -t default || tmux new -s default
   fi
 fi
-
+PATH=~/cli/sf/bin:$PATH

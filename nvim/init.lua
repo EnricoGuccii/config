@@ -12,6 +12,7 @@ vim.pack.add({
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/catppuccin/nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
+  { src = "https://github.com/Hoffs/omnisharp-extended-lsp.nvim" },
 })
 
 vim.g.mapleader = " "
@@ -38,7 +39,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "lua", "vim", "bash", "json", "python", "cpp", "css", "arduino", },
+  ensure_installed = { "lua", "vim", "bash", "json", "python", "cpp", "css", "arduino", "java", "c_sharp" },
   highlight = { enable = true },
 })
 
@@ -47,7 +48,23 @@ require("ibl").setup({
   scope = { enabled = true },
 })
 
-require("nvim-autopairs").setup()
+require("nvim-autopairs").setup({
+  map_cr = true,
+  map_bs = true,
+  check_ts = true,
+  fast_wrap = {},
+})
+
+vim.keymap.set("i", "<Tab>", function()
+  local col = vim.fn.col(".") - 1
+  local line = vim.fn.getline(".")
+  local next_char = line:sub(col + 1, col + 1)
+  if next_char == '"' or next_char == "'" or next_char == ")" or next_char == "]" or next_char == "}" then
+    return "<Right>"
+  else
+    return "<Tab>"
+  end
+end, { expr = true, noremap = true })
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -62,20 +79,29 @@ lspconfig.lua_ls.setup({
   },
 })
 
+lspconfig.jdtls.setup({})
 lspconfig.pyright.setup({})
 lspconfig.cssls.setup({})
 lspconfig.clangd.setup({})
--- lspconfig.ccls.setup {
---   init_options = {
---     cache = {
---       directory = ".ccls-cache",
---     }
---   },
--- }
+
+local pid = vim.fn.getpid()
+lspconfig.omnisharp.setup({
+  cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid) },
+  enable_roslyn_analyzers = true,
+  organize_imports_on_format = true,
+  enable_import_completion = true,
+  handlers = {
+    ["textDocument/definition"] = require("omnisharp_extended").handler,
+  },
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
 
 vim.keymap.set("n", "K", vim.diagnostic.open_float, { noremap = true, silent = true })
+vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { buffer = true })
+
 
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local luasnip = require("luasnip")
 
 cmp.setup({
@@ -94,6 +120,11 @@ cmp.setup({
     { name = "luasnip" },
   },
 })
+
+cmp.event:on(
+  "confirm_done",
+  cmp_autopairs.on_confirm_done()
+)
 
 require("oil").setup({
   view_options = {
