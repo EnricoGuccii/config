@@ -8,7 +8,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
 
-bindkey -v
+# bindkey -v
 export KEYTIMEOUT=1
 
 autoload -Uz compinit && compinit
@@ -21,6 +21,7 @@ PROMPT='%F{green}%n@%m%f %F{yellow}%~%f '
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export PATH="$HOME/.local/omnisharp:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
 
 alias grep='grep --color=auto'
 alias ll='lsd -all'
@@ -48,3 +49,7 @@ if command -v tmux >/dev/null 2>&1; then
   fi
 fi
 PATH=~/cli/sf/bin:$PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"

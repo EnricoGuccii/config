@@ -79,8 +79,18 @@ lspconfig.lua_ls.setup({
   },
 })
 
+lspconfig.pyright.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  on_new_config = function(config, root_dir)
+    local env = vim.trim(vim.fn.system('cd "' .. root_dir .. '"; poetry env info -p 2>/dev/null'))
+    if string.len(env) > 0 then
+      config.settings.python.pythonPath = env .. '/bin/python'
+    end
+  end
+})
+
 lspconfig.jdtls.setup({})
-lspconfig.pyright.setup({})
 lspconfig.cssls.setup({})
 lspconfig.clangd.setup({})
 
@@ -99,6 +109,7 @@ lspconfig.omnisharp.setup({
 vim.keymap.set("n", "K", vim.diagnostic.open_float, { noremap = true, silent = true })
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { buffer = true })
 
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "aaaa" })
 
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
