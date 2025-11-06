@@ -13,6 +13,9 @@ vim.pack.add({
   { src = "https://github.com/catppuccin/nvim" },
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/Hoffs/omnisharp-extended-lsp.nvim" },
+  { src = "https://github.com/linux-cultist/venv-selector.nvim" },
+  { src = "https://github.com/romgrk/barbar.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
 })
 
 vim.g.mapleader = " "
@@ -37,6 +40,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
   end,
 })
+
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "lua", "vim", "bash", "json", "python", "cpp", "css", "arduino", "java", "c_sharp" },
@@ -66,9 +70,8 @@ vim.keymap.set("i", "<Tab>", function()
   end
 end, { expr = true, noremap = true })
 
+
 require("luasnip.loaders.from_vscode").lazy_load()
-
-
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({
   settings = {
@@ -78,21 +81,11 @@ lspconfig.lua_ls.setup({
     },
   },
 })
-
-lspconfig.pyright.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  on_new_config = function(config, root_dir)
-    local env = vim.trim(vim.fn.system('cd "' .. root_dir .. '"; poetry env info -p 2>/dev/null'))
-    if string.len(env) > 0 then
-      config.settings.python.pythonPath = env .. '/bin/python'
-    end
-  end
-})
-
+lspconfig.pyright.setup({})
 lspconfig.jdtls.setup({})
 lspconfig.cssls.setup({})
 lspconfig.clangd.setup({})
+
 
 local pid = vim.fn.getpid()
 lspconfig.omnisharp.setup({
@@ -106,9 +99,13 @@ lspconfig.omnisharp.setup({
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
 })
 
+
+
+vim.keymap.set("n", "<leader>d", "<cmd>bdelete<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader><Tab>", "<cmd>bprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "K", vim.diagnostic.open_float, { noremap = true, silent = true })
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { buffer = true })
-
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "aaaa" })
 
 local cmp = require("cmp")
