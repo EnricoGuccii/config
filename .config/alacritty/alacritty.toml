@@ -1,0 +1,55 @@
+[window]
+dimensions = { columns = 100, lines = 30 }
+padding = { x = 8, y = 8 }
+decorations = "full"
+
+[font]
+normal = { family = "JetBrainsMonoNF", style = "Regular" }
+size = 12.0
+
+[terminal.shell]
+program = "/bin/zsh"
+
+[scrolling]
+history = 10000
+
+[mouse]
+hide_when_typing = true
+
+### Jellybeans colorscheme ###
+[colors.primary]
+foreground = "#dedede"
+background = "#121212"
+
+[colors.cursor]
+text = "#ffffff"
+cursor = "#ffa560"
+
+[colors.selection]
+text = "#f4f4f4"
+background = "#474e91"
+
+[colors.normal]
+black = "#929292"
+red = "#e27373"
+green = "#94b979"
+yellow = "#ffba7b"
+blue = "#97bedc"
+magenta = "#e1c0fa"
+cyan = "#00988e"
+white = "#dedede"
+
+[colors.bright]
+black = "#bdbdbd"
+red = "#ffa1a1"
+green = "#bddeab"
+yellow = "#ffdca0"
+blue = "#b1d8f6"
+magenta = "#fbdaff"
+cyan = "#1ab2a8"
+white = "#ffffff"
+
+
+
+
+
