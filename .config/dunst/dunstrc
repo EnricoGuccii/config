@@ -1,0 +1,36 @@
+[global]
+    monitor = 0
+    follow = keyboard
+    width = (250, 500)
+    height = (0, 750)
+    offset = (17, 26)
+    padding = 5
+    horizontal_padding = 5
+    gap_size = 3
+    transparency = 35
+    frame_width = 2
+    frame_color="#607566"
+
+    font = JetBrainsMonoNF 
+    min_icon_size = 32
+    max_icon_size = 32
+    format = "<b>%s</b>\n%b"
+
+[urgency_low]
+    background = "#121212"
+    foreground = "#dedede"
+    frame_color = "#dedede"
+    timeout = 5
+
+[urgency_normal]
+    background = "#121212"
+    foreground = "#dedede"
+    frame_color = "#94b979"
+    timeout = 5
+
+[urgency_critical]
+    background = "#121212"
+    foreground = "#dedede"
+    frame_color = "#e27373"
+    timeout = 5
+
