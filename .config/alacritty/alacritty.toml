@@ -16,40 +16,34 @@ history = 10000
 [mouse]
 hide_when_typing = true
 
-### Jellybeans colorscheme ###
 [colors.primary]
 foreground = "#dedede"
 background = "#121212"
 
 [colors.cursor]
-text = "#ffffff"
-cursor = "#ffa560"
+text = "#F5F1E8"
+cursor = "#D27319"
 
 [colors.selection]
-text = "#f4f4f4"
+text = "#F5F1E8"
 background = "#474e91"
 
 [colors.normal]
 black = "#929292"
 red = "#e27373"
-green = "#bddeab"
-yellow = "#ffba7b"
+green = "#B5B23C"
+yellow = "#D27319"
 blue = "#97bedc"
-magenta = "#e1c0fa"
-cyan = "#00988e"
+magenta = "#7162ac"
+cyan = "#00838D"
 white = "#dedede"
 
 [colors.bright]
 black = "#bdbdbd"
 red = "#ffa1a1"
-green = "#bddeab"
-yellow = "#ffdca0"
+green = "#D1D36F"
+yellow = "#F6D99D"
 blue = "#b1d8f6"
-magenta = "#fbdaff"
-cyan = "#1ab2a8"
-white = "#ffffff"
-
-
-
-
-
+magenta = "#C8A2C9"
+cyan = "#3CA698"
+white = "#F5F1E8"
