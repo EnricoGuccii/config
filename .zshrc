@@ -8,7 +8,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
 
-# bindkey -v
+bindkey -v
 export KEYTIMEOUT=1
 
 autoload -Uz compinit && compinit
@@ -20,36 +20,70 @@ PROMPT='%F{green}%n@%m%f %F{yellow}%~%f '
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-export PATH="$HOME/.local/omnisharp:$PATH"
-export PATH="$HOME/.dotnet/tools:$PATH"
 
+ 
 alias grep='grep --color=auto'
 alias ll='lsd -all'
+alias ls='lsd -all'
 alias l='lsd -l'
-alias lg='lazygit'
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
 alias c='clear'
+
 alias wiki='wikiman'
+alias lg='lazygit'
+alias blue='bluetui'
+alias wifi='impala'
 
 bindkey -M vicmd 'jj' vi-cmd-mode
 bindkey -M viins 'jj' vi-cmd-mode
 
-AUTOSUGGEST_DIR="${HOME}/.zsh-autosuggestions"
+
+
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+    echo -ne "\e[1 q" 
+  else
+    echo -ne "\e[5 q"
+  fi
+}
+zle -N zle-keymap-select
+
+function zle-line-init {
+  echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+
+
+# plugins ==========================================
+AUTOSUGGEST_DIR="${HOME}/.config/zsh/.zsh-autosuggestions"
 if [ ! -d "$AUTOSUGGEST_DIR" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "$AUTOSUGGEST_DIR"
 fi
 source "$AUTOSUGGEST_DIR/zsh-autosuggestions.zsh"
+
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
+SYNTAX_HIGHLIGHTING="${HOME}/.config/zsh/.zsh-syntax-highlighting"
+if [ ! -d "$SYNTAX_HIGHLIGHTING" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$SYNTAX_HIGHLIGHTING"
+fi
+source "$SYNTAX_HIGHLIGHTING/zsh-syntax-highlighting.zsh"
+
+
+
+
+
+# tmux shit
 if command -v tmux >/dev/null 2>&1; then
   if [ -z "$TMUX" ] && [ -n "$PS1" ] && [[ "$TERM" != "linux" ]]; then
     tmux attach -t default || tmux new -s default
   fi
 fi
-PATH=~/cli/sf/bin:$PATH
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/cli/sf/bin:$HOME/.platformio/penv/bin"
+
+. "$HOME/.local/bin/env"
