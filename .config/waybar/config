@@ -1,0 +1,62 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 15, 
+    "spacing": 5,
+
+    "modules-left": ["sway/workspaces"],
+    "modules-right": ["wireplumber", "backlight", "battery", "group/net" ,"clock"],
+
+
+    "group/net": {
+        "orientation": "horizontal",
+        "modules": ["network", "bluetooth"]
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "on-click": "activate"
+    },
+
+    "clock": {
+        "format": "{:%d.%m.%Y   %H:%M}"
+    },
+
+    "wireplumber": {
+        "format": "{volume}% 󰕾",
+        "format-muted": "󰖁",  
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle" 
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "interval": 10,
+        "format": "{icon} {capacity}% ({time})",
+        "format-charging": "󱐋 {icon} {capacity}%", 
+        "format-plugged": " {capacity}%",     
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}"
+    },
+
+    "backlight": {
+        "format": "{percent}% 󰃟"
+    },
+
+    "network": {
+        "format-ethernet": "󰈀 ",
+        "format-wifi": "{icon} ",
+        "format-disconnected": "󰤮 ",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱"
+    }
+}
