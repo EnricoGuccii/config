@@ -5,11 +5,13 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $browser mullvad-browser
+set $browser firefox
 
-set $menu wmenu-run -N "#000000" -s "#000000" -S "#bddeab" -M "#000000" -p "Run: "
+set $menu wmenu-run -N "#121212" -s "#121212" -S "#C9DE95" -M "#121212" -p "Run: "
 
 exec wlsunset -T 4200
+
+exec waybar
 
 exec wl-paste --watch cliphist store
 
@@ -147,23 +149,23 @@ smart_borders on
 smart_gaps on
 gaps inner 5
 
-client.focused          #bddeab #bddeab #ffffff #bddeab #bddeab
+client.focused          #C9DE95 #C9DE95 #ffffff #C9DE95 #C9DE95
 client.unfocused        #222222 #222222 #888888 #222222 #222222
 
 
-bar {
-    status_command i3status
-    position top
-    colors {
-        statusline #ffffff
-        background #000000
-        focused_workspace #000000 #000000 #ffffff
-        active_workspace #000000 #000000 #888888
-        inactive_workspace #000000 #000000 #444444
-    }
-}
+# bar {
+#     status_command i3status
+#     position top
+#     colors {
+#         statusline #ffffff
+#         background #000000
+#         focused_workspace #000000 #000000 #ffffff
+#         active_workspace #000000 #000000 #888888
+#         inactive_workspace #000000 #000000 #444444
+#     }
+# }
 
-include /etc/sway/config.d/*
+# include /etc/sway/config.d/*
 
 
 
