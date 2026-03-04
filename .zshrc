@@ -16,7 +16,7 @@ autoload -Uz bashcompinit && bashcompinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-PROMPT='%F{green}%n@%m%f %F{yellow}%~%f '
+PROMPT='%F{#C9DE95}%n@%m%f %F{#F6D99D}%~%f '
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -70,9 +70,6 @@ if [ ! -d "$SYNTAX_HIGHLIGHTING" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting "$SYNTAX_HIGHLIGHTING"
 fi
 source "$SYNTAX_HIGHLIGHTING/zsh-syntax-highlighting.zsh"
-
-
-
 
 
 # tmux shit
